@@ -38,7 +38,7 @@ body{
     100%{transform: translateY(-10vh) scale(1.2); opacity:0;}
 }
 
-/* 🎉 BIG CARD WITH ANIMATIONS */
+/* 🎉 YOUR ORIGINAL CARD + MOBILE RESPONSIVE */
 .card{
     text-align:center;
     background: rgba(255,255,255,0.95);
@@ -53,6 +53,33 @@ body{
     background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,248,248,0.98));
     border:1px solid rgba(255,255,255,0.5);
     backdrop-filter: blur(10px);
+}
+
+/* MOBILE SMALL CARD */
+@media (max-width: 768px) {
+    .card {
+        padding:30px 20px !important;
+        border-radius:25px;
+        max-width:350px;
+        width:92vw;
+    }
+    .teddy { font-size:70px !important; }
+    h1 { font-size:26px; margin:20px 0; }
+    button { padding:12px 24px; font-size:16px; height:48px; }
+    #noWrapper { height:48px; }
+    .buttons { gap:20px; margin-top:25px; padding:0 10px; }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding:25px 15px !important;
+        border-radius:22px;
+        width:95vw;
+    }
+    .teddy { font-size:60px !important; }
+    h1 { font-size:22px; }
+    button { padding:10px 20px; font-size:15px; height:44px; }
+    #noWrapper { height:44px; }
 }
 
 @keyframes cardEntrance{
@@ -86,7 +113,6 @@ h1{
     100%{opacity:1; transform:translateY(0);}
 }
 
-/* PERFECT BUTTONS */
 .buttons{
     display:flex;
     justify-content:center;
@@ -147,7 +173,6 @@ button:hover{
     margin-top:2px;
 }
 
-/* SUCCESS SCREEN */
 .success{
     text-align:center;
     color:#ff1493;
@@ -157,6 +182,15 @@ button:hover{
     padding:60px 40px;
     max-width:500px;
     margin:0 auto;
+}
+
+@media (max-width: 768px) {
+    .success { 
+        font-size:28px; 
+        padding:40px 20px; 
+        max-width:90vw;
+    }
+    .success div { font-size:90px !important; }
 }
 
 @keyframes successPop{
@@ -169,7 +203,7 @@ button:hover{
 <body>
 
 <div class="card" id="card">
-    <div class="teddy">💖🌹</div>
+    <div class="teddy">🧸🌹</div>
     <h1>Will you be my Valentine?</h1>
     <div class="buttons">
         <button id="yes">Yes 💖</button>
@@ -195,7 +229,7 @@ const funnyTexts = [
     "Just click YES already 😍"
 ];
 
-/* Floating Hearts */
+/* YOUR ORIGINAL Floating Hearts */
 function createHearts(){
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -208,17 +242,18 @@ function createHearts(){
 }
 setInterval(createHearts,300);
 
+/* ✅ YOUR ORIGINAL PERFECT MOVEMENT - UNCHANGED */
 const noWrapper = document.getElementById("noWrapper");
 
 function moveButton(){
     const wrapperWidth = noWrapper.offsetWidth;
     const wrapperHeight = noWrapper.offsetHeight;
 
-    // 🔧 FIXED: Limit boundaries + cycle back to card area
+    // 🔧 YOUR ORIGINAL LOGIC - FULL SCREEN MOVEMENT
     const maxX = Math.min(window.innerWidth - wrapperWidth - 10, card.offsetLeft + card.offsetWidth);
     const maxY = Math.min(window.innerHeight - wrapperHeight - 10, card.offsetTop + card.offsetHeight);
     
-    const randomX = (Math.random() * maxX + 20) % (maxX - 40) + 20;  // Stay near card
+    const randomX = (Math.random() * maxX + 20) % (maxX - 40) + 20;
     const randomY = (Math.random() * maxY + 20) % (maxY - 40) + 20;
 
     noWrapper.style.position = "fixed";
@@ -232,16 +267,16 @@ function moveButton(){
     message.style.height = "auto";
     messageIndex++;
 
-    // YES grows (LIMITED to prevent overflow)
+    // YES grows
     const maxYesScale = 1.8;
     const newScale = Math.min(yesScale + 0.12, maxYesScale);
     yesBtn.style.transform = `scale(${newScale})`;
     yesBtn.style.boxShadow = `0 15px 30px rgba(40,167,69,0.4)`;
     
-    yesScale = newScale; 
+    yesScale = newScale;
 }
 
-let yesScale = 1; 
+let yesScale = 1;
 
 noWrapper.addEventListener("mouseenter", moveButton);
 noWrapper.addEventListener("touchstart", function(e){
@@ -249,11 +284,10 @@ noWrapper.addEventListener("touchstart", function(e){
     moveButton();
 });
 
-/* YES Click */
 yesBtn.addEventListener("click", function(){
     document.body.innerHTML = `
         <div class="success">
-            <div style="font-size:120px; margin-bottom:20px;">💖😍💖</div>
+            <div style="font-size:120px; margin-bottom:20px;">💖💖😍</div>
             <h1>Yessss! I knew it! 🎉</h1>
             <p style="font-size:24px; margin-top:20px;">You are officially my Valentine 💞✨</p>
         </div>
